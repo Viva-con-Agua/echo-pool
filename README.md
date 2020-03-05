@@ -6,6 +6,14 @@
 go get github.com/Viva-con-Agua/echo-pool/...       
 ```
 
+## use 
+
+```
+import (
+	"github.com/Viva-con-Agua/echo-pool/pool"
+)
+```
+
 ## redis 
 
 ### connect redis
