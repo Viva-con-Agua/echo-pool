@@ -1,5 +1,11 @@
 # echo-pool
 
+## install
+
+```
+go get github.com/Viva-con-Agua/echo-pool/...       
+```
+
 ## responses models
 
 ```
