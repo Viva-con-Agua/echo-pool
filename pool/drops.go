@@ -72,10 +72,6 @@ type (
 		PoolUser PoolUser
 		AccessToken string
 	}
-	Permission struct {
-		Role string
-		Pillar string
-	}
 	AccessToken struct {
 		AccessToken string `json:"access_token"`
 	}
