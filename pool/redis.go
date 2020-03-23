@@ -71,8 +71,8 @@ func DropsSessionAuth(next echo.HandlerFunc) echo.HandlerFunc {
 				return next(c)
 			}
 			LogoutList = LogoutList.Delete(user.Uuid)
-			return echo.NewHTTPError(http.StatusUnauthorized, Unauthorized())
 		}
+		DeleteSession(c)
 		return echo.NewHTTPError(http.StatusUnauthorized, Unauthorized())
 	}
 }
@@ -101,6 +101,8 @@ func DeleteSession(c echo.Context) {
 		HttpOnly: true,
 	}
 	sess.Values["valid"] = nil
+	sess.Values["token"] = nil
+	sess.Values["user"] = nil
 	sess.Save(c.Request(), c.Response())
 }
 

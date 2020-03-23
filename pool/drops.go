@@ -130,7 +130,7 @@ func (u* DropsUser) PoolUser() *PoolUser {
 			role.Name = r.Name
 			role.Pillar = r.Pillar.Pillar
 			role.CrewId = r.Crew.Id
-			role.CrewName = r.Name
+			role.CrewName = r.Crew.Name
 			roles = append(roles, *role)
 		}
 		user.Roles = roles

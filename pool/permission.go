@@ -1,7 +1,6 @@
 package pool
 
 import (
-	"log"
 	"net/http"
 	"github.com/labstack/echo"
 
@@ -45,7 +44,6 @@ func CheckPermission(permission *PermissionList) echo.MiddlewareFunc {
 			val := sess.Values["user"]
 			var user = &PoolUser{}
 			user, _ = val.(*PoolUser)
-			log.Print(permission)
 			for _, v := range user.Roles {
 				if permission.Contains(v) {
 					return next(c)
