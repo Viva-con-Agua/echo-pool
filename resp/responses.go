@@ -1,4 +1,4 @@
-package pool
+package resp
 
 type (
 	ResponseMessage struct {

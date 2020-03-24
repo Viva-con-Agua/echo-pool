@@ -1,4 +1,4 @@
-package pool
+package config
 
 import (
 	"github.com/jinzhu/configor"

@@ -1,15 +1,17 @@
-package pool
+package nats
 
 import (
 	"log"
+	"github.com/Viva-con-Agua/echo-pool/config"
 	nats "github.com/nats-io/nats.go"
+
 )
 
 var Nats = new(nats.EncodedConn)
 
 func NatsConnect() {
-	log.Print(Config.Nats.Url)
-	nc, err := nats.Connect(Config.Nats.Url)
+	log.Print(config.Config.Nats.Url)
+	nc, err := nats.Connect(config.Config.Nats.Url)
 	if err != nil {
 		log.Fatal("nats connection failed", err)
 	}
