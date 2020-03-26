@@ -17,7 +17,7 @@ func (l PermissionList) Add(p Permission) PermissionList {
 	return append(l, p)
 }
 
-func (l PermissionList) Contains(r PoolRole) bool {
+func (l PermissionList) Contains(r Role) bool {
 	for _, v := range l {
 		if v.Name == r.Name {
 			if v.Pillar == r.Pillar {

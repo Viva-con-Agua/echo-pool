@@ -1,17 +1,17 @@
 package auth 
 
 type (
-	PoolRole struct {
+	Role struct {
 		Name string `json:"name"`
 		CrewId string `json:"crewId"`
 		CrewName string `json:"crewName"`
 		Pillar string `json:"pillar"`
 	}
-	PoolUser struct {
+	User struct {
 		Uuid string `json:"uuid"`
 		Email string `json:"email"`
 		Name string `json:"name"`
-		Roles []PoolRole `json:"roles"`
+		Roles []Role `json:"roles"`
 	}
 	AccessToken struct {
 		AccessToken string `json:"access_token"`
