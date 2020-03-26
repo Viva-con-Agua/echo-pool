@@ -36,8 +36,8 @@ func CheckPermission(permission *PermissionList) echo.MiddlewareFunc {
 		return func(c echo.Context) error {
 			sess, _ := session.Get("session", c)
 			val := sess.Values["user"]
-			var user = &PoolUser{}
-			user, _ = val.(*PoolUser)
+			var user = &User{}
+			user, _ = val.(*User)
 			for _, v := range user.Roles {
 				if permission.Contains(v) {
 					return next(c)

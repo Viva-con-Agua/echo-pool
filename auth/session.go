@@ -12,7 +12,7 @@ import (
 
 
 
-func SetSession(c echo.Context, user *PoolUser, token *AccessToken) {
+func SetSession(c echo.Context, user *User, token *AccessToken) {
 	sess, _ := session.Get("session", c)
 	sess.Options = &sessions.Options{
 		Path:     "/",
@@ -30,11 +30,11 @@ func SetSession(c echo.Context, user *PoolUser, token *AccessToken) {
 	}
 }
 
-func GetUser(c echo.Context) (u *PoolUser, contains bool){
+func GetUser(c echo.Context) (u *User, contains bool){
 	sess, _ := session.Get("session", c)
 	val := sess.Values["user"]
-	var user = &PoolUser{}
-	user, contains = val.(*PoolUser)
+	var user = &User{}
+	user, contains = val.(*User)
 	if contains == false {
 		return nil, contains
 	}

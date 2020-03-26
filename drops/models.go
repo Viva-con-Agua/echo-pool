@@ -48,21 +48,21 @@ type (
 
 )
 
-func (u* DropsUser) PoolUser() *auth.PoolUser {
-	user := new(auth.PoolUser)
+func (u* DropsUser) PoolUser() *auth.User {
+	user := new(auth.User)
 	user.Uuid = u.Id
 	for _, p := range u.Profiles {
 		user.Email = p.Email
 		user.Name = p.Supporter.FullName
-		var roles []auth.PoolRole
+		var roles []auth.Role
 		for _, r := range u.Roles {
-			role := new(auth.PoolRole)
+			role := new(auth.Role)
 			role.Name = r.Role
 			roles = append(roles, *role)
 		}
 		var ddRoles = p.Supporter.Roles
 		for _, r := range ddRoles {
-			role := new(auth.PoolRole)
+			role := new(auth.Role)
 			role.Name = r.Name
 			role.Pillar = r.Pillar.Pillar
 			role.CrewId = r.Crew.Id
