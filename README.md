@@ -14,30 +14,53 @@ import (
 )
 ```
 
-## redis 
+## auth
 
 ### connect redis
 
 ```
-	store := pool.RedisSession("172.2.150.1:6379")
+	store := pool.RedisSession()
 	
   //create echo server
 	e := echo.New()
 	e.Use(store)
 ```
 
-### use session in api
+### use nats 
 
 ```
 	apiV1 := e.Group("/api/v1")
-	apiV1.Use(pool.SessionAuth)
+	apiV1.Use(resp.SessionAuth)
+```
+### nats
+
+#### import
+```
+  import (
+    "github.com/Viva-con-Agua/echo-pool/nats"
+
+  )
+```
+#### initial
+```
+	nats.NatsConnect()
+```
+#### use
+
+https://github.com/nats-io/nats.go#encoded-connections
+
+### responses models
+
+#### import 
+```
+import (
+	"github.com/Viva-con-Agua/echo-pool/resp"
+)
 ```
 
-
-## responses models
-
+#### use
 ```
-pool.InternelServerError() 
+resp.InternelServerError() 
 
 {
   "message": "Internel server error, please check logs"
@@ -45,7 +68,7 @@ pool.InternelServerError()
 ```
 
 ```
-pool.Conflict() 
+resp.Conflict() 
 
 {
   "message": "Models already exists"
@@ -53,7 +76,7 @@ pool.Conflict()
 ```
 
 ```
-pool.Created() 
+resp.Created() 
 
 {
   "message": "Successful created"
@@ -61,7 +84,7 @@ pool.Created()
 ```
 
 ```
-pool.Unauthorized() 
+resp.Unauthorized() 
 
 {
   "message": "Not authenticated"
@@ -69,7 +92,7 @@ pool.Unauthorized()
 ```
 
 ```
-pool.NoContent() 
+resp.NoContent() 
 
 {
   "message": "Not found",
@@ -78,7 +101,7 @@ pool.NoContent()
 ```
 
 ```
-pool.Updated() 
+resp.Updated() 
 
 {
   "message": "Successful updated"
@@ -86,7 +109,7 @@ pool.Updated()
 ```
 
 ```
-pool.Deleted() 
+resp.Deleted() 
 
 {
   "message": "Successful deleted",
