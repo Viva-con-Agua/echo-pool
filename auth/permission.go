@@ -3,31 +3,24 @@ package auth
 type (
 	Permission struct {
 		Name string
-		Pillar string
 	}
 	PermissionList []Permission
 )
 
 var (
-	NoRole = &Permission{Name: "foo", Pillar: "bar"}
-	Admin = &Permission{Name: "admin", Pillar: ""}
+	NoRole = &Permission{Name: "foo"}
+	Admin  = &Permission{Name: "admin"}
 )
- 
+
 func (l PermissionList) Add(p Permission) PermissionList {
 	return append(l, p)
 }
 
-func (l PermissionList) Contains(r Role) bool {
+func (l PermissionList) Contains(r AccessUser) bool {
 	for _, v := range l {
-		if v.Name == r.Name {
-			if v.Pillar == r.Pillar {
-				return true
-			}
+		if v.Name == r.RoleName {
+			return true
 		}
 	}
 	return false
 }
-
-
-
-

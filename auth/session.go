@@ -1,16 +1,10 @@
 package auth
 
 import (
-	"log"
 	"github.com/gorilla/sessions"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo-contrib/session"
 )
-
-
-
-
-
 
 func SetSession(c echo.Context, user *User, token *AccessToken) {
 	sess, _ := session.Get("session", c)
@@ -19,18 +13,15 @@ func SetSession(c echo.Context, user *User, token *AccessToken) {
 		MaxAge:   86400 * 7,
 		HttpOnly: true,
 	}
-	log.Print(sess.Values["valid"])
 	if sess.Values["valid"] == nil {
 		sess.Values["valid"] = true
 		sess.Values["token"] = token.AccessToken
 		sess.Values["user"] = &user
-		log.Print(user)
-		log.Print(sess.Values["user"])
 		sess.Save(c.Request(), c.Response())
 	}
 }
 
-func GetUser(c echo.Context) (u *User, contains bool){
+func GetUser(c echo.Context) (u *User, contains bool) {
 	sess, _ := session.Get("session", c)
 	val := sess.Values["user"]
 	var user = &User{}
@@ -54,5 +45,3 @@ func DeleteSession(c echo.Context) {
 	sess.Values["user"] = nil
 	sess.Save(c.Request(), c.Response())
 }
-
-
