@@ -8,10 +8,10 @@ var (
 	Config = struct {
 		Drops struct {
 			Url struct {
-				Code string
+				Code     string
 				Redirect string
-				Token string
-				User string
+				Token    string
+				User     string
 			}
 			Oauth struct {
 				ClientId string
@@ -27,5 +27,5 @@ var (
 )
 
 func LoadConfig() {
-	configor.Load(&Config, "config.yml")
+	configor.Load(&Config, "config/config.yml")
 }
