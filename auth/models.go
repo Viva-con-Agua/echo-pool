@@ -17,12 +17,13 @@ type (
 		Pillar   string `json:"pillar"`
 	}
 	User struct {
-		Uuid    string       `json:"uuid"`
-		Email   string       `json:"email"`
-		Name    string       `json:"name"`
-		Access  []AccessUser `json:"access"`
-		Updated int          `json:"updated"`
-		Created int          `json:"created"`
+		Uuid      string       `json:"uuid"`
+		Email     string       `json:"email"`
+		Name      string       `json:"name"`
+		Confirmed int          `json:"confirmed"`
+		Access    []AccessUser `json:"access"`
+		Updated   int          `json:"updated"`
+		Created   int          `json:"created"`
 	}
 	AccessToken struct {
 		AccessToken string `json:"access_token"`
