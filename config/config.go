@@ -23,6 +23,10 @@ var (
 		Nats struct {
 			Url string
 		}
+		Cookie struct {
+			Samesite string
+			Secure   string
+		}
 	}{}
 )
 
