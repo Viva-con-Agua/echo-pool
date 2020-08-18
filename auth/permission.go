@@ -16,9 +16,9 @@ func (l PermissionList) Add(p Permission) PermissionList {
 	return append(l, p)
 }
 
-func (l PermissionList) Contains(r AccessUser) bool {
+func (l PermissionList) Contains(r Access) bool {
 	for _, v := range l {
-		if v.Name == r.RoleName {
+		if v.Name == r.AccessName {
 			return true
 		}
 	}
