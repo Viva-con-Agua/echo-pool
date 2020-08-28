@@ -1,25 +1,26 @@
 package auth
 
 type (
+
+	// For user model
 	Access struct {
-		Uuid        string `json:"uuid" validate:"required"`
-		AccessName  string `json:"access_name" validate:"required"`
-		ServiceName string `json:"service_name" validate:"required"`
-		ModelUuid   string `json:"model_uuid"`
-		ModeName    string `json:"model_name"`
-		ModelType   string `json:"model_type"`
-		Created     int    `json:"created" validate:"required"`
+		AccessUuid string `json:"access_uuid" validate:"required"`
+		AccessName string `json:"name" validate:"required"`
+		ModelUuid  string `json:"model_uuid" validate:"required"`
+		ModelName  string `json:"model_name" validate:"required"`
+		ModelType  string `json:"model_type" validate:"required"`
+		Created    int64  `json:"created" validate:"required"`
 	}
+	AccessList map[string][]Access
 
 	User struct {
-		Uuid      string   `json:"uuid"`
-		Email     string   `json:"email"`
-		Name      string   `json:"name"`
-		Confirmed int      `json:"confirmed"`
-		Access    []Access `json:"access"`
-		Profile   Profile  `json:"profile"`
-		Updated   int      `json:"updated"`
-		Created   int      `json:"created"`
+		Uuid      string     `json:"uuid"`
+		Email     string     `json:"email"`
+		Confirmed int        `json:"confirmed"`
+		Access    AccessList `json:"access"`
+		Profile   Profile    `json:"profile"`
+		Updated   int        `json:"updated"`
+		Created   int        `json:"created"`
 	}
 	AccessToken struct {
 		AccessToken string `json:"access_token"`

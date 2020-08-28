@@ -32,6 +32,7 @@ func GetAccessToken(key interface{}) ([]byte, error) {
 
 }
 
+/*
 func CheckPermission(permission *PermissionList) echo.MiddlewareFunc {
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
@@ -47,4 +48,4 @@ func CheckPermission(permission *PermissionList) echo.MiddlewareFunc {
 			return echo.NewHTTPError(http.StatusUnauthorized, resp.Unauthorized())
 		}
 	}
-}
+}*/
