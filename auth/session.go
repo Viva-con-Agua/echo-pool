@@ -9,7 +9,7 @@ import (
 	"github.com/labstack/echo-contrib/session"
 )
 
-func SetSession(c echo.Context, user *User, token *AccessToken) {
+func SetSession(c echo.Context, user *User) {
 	secure := true
 	if config.Config.Cookie.Secure == "false" {
 		secure = false
@@ -32,12 +32,9 @@ func SetSession(c echo.Context, user *User, token *AccessToken) {
 		SameSite: sameSite,
 		Secure:   secure,
 	}
-	if sess.Values["valid"] == nil {
-		sess.Values["valid"] = true
-		sess.Values["token"] = token.AccessToken
-		sess.Values["user"] = &user
-		sess.Save(c.Request(), c.Response())
-	}
+	sess.Values["valid"] = true
+	sess.Values["user"] = &user
+	sess.Save(c.Request(), c.Response())
 }
 
 func GetUser(c echo.Context) (u *User, contains bool) {
@@ -60,7 +57,6 @@ func DeleteSession(c echo.Context) {
 		HttpOnly: true,
 	}
 	sess.Values["valid"] = nil
-	sess.Values["token"] = nil
 	sess.Values["user"] = nil
 	sess.Save(c.Request(), c.Response())
 }

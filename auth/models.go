@@ -6,9 +6,9 @@ type (
 	Access struct {
 		AccessUuid string `json:"access_uuid" validate:"required"`
 		AccessName string `json:"name" validate:"required"`
-		ModelUuid  string `json:"model_uuid" validate:"required"`
-		ModelName  string `json:"model_name" validate:"required"`
-		ModelType  string `json:"model_type" validate:"required"`
+		ModelUuid  string `json:"model_uuid,omitempty"`
+		ModelName  string `json:"model_name,omitempty"`
+		ModelType  string `json:"model_type,omitempty"`
 		Created    int64  `json:"created" validate:"required"`
 	}
 	AccessList map[string][]Access
