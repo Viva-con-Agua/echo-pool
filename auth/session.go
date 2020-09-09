@@ -2,6 +2,7 @@ package auth
 
 import (
 	"net/http"
+	"os"
 
 	"github.com/Viva-con-Agua/echo-pool/config"
 	"github.com/gorilla/sessions"
@@ -11,14 +12,14 @@ import (
 
 func SetSession(c echo.Context, user *User) {
 	secure := true
-	if config.Config.Cookie.Secure == "false" {
+	if os.Getenv("COOKIE_SECURE") == "false" {
 		secure = false
 	}
 	sameSite := http.SameSiteNoneMode
-	if config.Config.Cookie.Samesite == "lax" {
+	if os.Getenv("SAME_SITE") == "lax" {
 		sameSite = http.SameSiteLaxMode
 	}
-	if config.Config.Cookie.Samesite == "none" {
+	if os.Getenv("SAME_SITE") == "none" {
 		sameSite = http.SameSiteNoneMode
 	}
 	if config.Config.Cookie.Samesite == "strict" {
