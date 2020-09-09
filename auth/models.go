@@ -1,10 +1,15 @@
 package auth
 
+import (
+	"log"
+	"strings"
+)
+
 type (
 
 	// For user model
 	Access struct {
-		AccessUuid string `json:"access_uuid" validate:"required"`
+		AccessUuid string `json:"access_uuid,omitempty"`
 		AccessName string `json:"name" validate:"required"`
 		ModelUuid  string `json:"model_uuid,omitempty"`
 		ModelName  string `json:"model_name,omitempty"`
@@ -14,13 +19,14 @@ type (
 	AccessList map[string][]Access
 
 	User struct {
-		Uuid      string     `json:"uuid"`
-		Email     string     `json:"email"`
-		Confirmed int        `json:"confirmed"`
-		Access    AccessList `json:"access"`
-		Profile   Profile    `json:"profile"`
-		Updated   int        `json:"updated"`
-		Created   int        `json:"created"`
+		Uuid       string     `json:"uuid"`
+		Email      string     `json:"email"`
+		Confirmed  int        `json:"confirmed"`
+		Access     AccessList `json:"access"`
+		Profile    Profile    `json:"profile"`
+		Updated    int64      `json:"updated"`
+		Created    int64      `json:"created"`
+		Additional Additional `json:"additional"`
 	}
 	AccessToken struct {
 		AccessToken string `json:"access_token"`
@@ -56,4 +62,34 @@ type (
 		Created    int    `json:"created" validate:"required"`
 	}
 	M map[string]interface{}
+
+	UserRequest struct {
+		Uuid map[string]Additional `json:"uuid" validate:"required"`
+	}
+	Additional map[string]interface{}
 )
+
+func (f *UserRequest) Filter() string {
+	if f != nil {
+		filter := "WHERE "
+		for key, _ := range f.Uuid {
+			log.Print(key)
+			filter = filter + "u.uuid = '" + key + "' OR "
+		}
+		filter = strings.TrimSuffix(filter, "OR ")
+		return filter
+	} else {
+		return ""
+	}
+}
+
+func (req *UserRequest) Additional(u []User) []User {
+	var list []User
+	for _, val := range u {
+		log.Print(req)
+		val.Additional = (req.Uuid)[val.Uuid]
+		list = append(list, val)
+	}
+	return list
+
+}

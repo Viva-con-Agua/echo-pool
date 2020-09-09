@@ -3,6 +3,7 @@ package auth
 import (
 	"bytes"
 	"encoding/gob"
+	"log"
 	"net/http"
 
 	"github.com/Viva-con-Agua/echo-pool/resp"
@@ -17,6 +18,7 @@ func SessionAuth(next echo.HandlerFunc) echo.HandlerFunc {
 
 			return next(c)
 		}
+		log.Print(sess)
 		return echo.NewHTTPError(http.StatusUnauthorized, resp.Unauthorized())
 	}
 }
