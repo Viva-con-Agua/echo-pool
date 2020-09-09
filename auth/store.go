@@ -3,15 +3,16 @@ package auth
 import (
 	"encoding/gob"
 	"log"
+	"os"
 
 	"github.com/go-redis/redis"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo-contrib/session"
 )
 
-func RedisSession(host string, port string) echo.MiddlewareFunc {
+func RedisSession() echo.MiddlewareFunc {
 	client := redis.NewClient(&redis.Options{
-		Addr: host + ":" + port,
+		Addr: os.Getenv("REDIS_HOST") + ":" + os.Getenv("REDIS_PORT"),
 	})
 
 	redis, err := NewRedisStore(client)
