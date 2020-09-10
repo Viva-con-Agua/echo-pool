@@ -61,7 +61,8 @@ type (
 		Updated    int    `json:"updated" validate:"required"`
 		Created    int    `json:"created" validate:"required"`
 	}
-	M map[string]interface{}
+	AddressList []Address
+	M           map[string]interface{}
 
 	UserRequest struct {
 		Uuid map[string]Additional `json:"uuid" validate:"required"`
@@ -92,4 +93,16 @@ func (req *UserRequest) Additional(u []User) []User {
 	}
 	return list
 
+}
+
+func (list *AddressList) Distinct() *AddressList {
+	r := make(AddressList, 0, len(*list))
+	m := make(map[Address]bool)
+	for _, val := range *list {
+		if _, ok := m[val]; !ok {
+			m[val] = true
+			r = append(r, val)
+		}
+	}
+	return &r
 }
