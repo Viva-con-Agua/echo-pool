@@ -5,10 +5,13 @@ import (
 	"encoding/gob"
 	"log"
 	"net/http"
+	"os"
+	"strings"
 
 	"github.com/Viva-con-Agua/echo-pool/resp"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo-contrib/session"
+	"github.com/labstack/echo/middleware"
 )
 
 func SessionAuth(next echo.HandlerFunc) echo.HandlerFunc {
@@ -33,6 +36,12 @@ func GetAccessToken(key interface{}) ([]byte, error) {
 	return buf.Bytes(), nil
 
 }
+
+var CORSConfig = middleware.CORSWithConfig(middleware.CORSConfig{
+	AllowOrigins:     strings.Split(os.Getenv("ALLOW_ORIGINS"), ","),
+	AllowHeaders:     []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
+	AllowCredentials: true,
+})
 
 /*
 func CheckPermission(permission *PermissionList) echo.MiddlewareFunc {
