@@ -2,11 +2,12 @@ package resp
 
 type (
 	ResponseMessage struct {
-		Message string `json:"message"`
+		Message string                 `json:"message"`
+		Data    map[string]interface{} `json:"data"`
 	}
 	ResponseMessageId struct {
 		Message string `json:"message"`
-		Uuid   string `json:"uuid"`
+		Uuid    string `json:"uuid"`
 	}
 )
 
