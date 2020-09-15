@@ -21,7 +21,6 @@ func RedisSession() echo.MiddlewareFunc {
 		log.Fatal("failed to create redis store: ", err)
 	}
 	gob.Register(&UserSession{})
-	gob.Register(&M{})
 	gob.Register(&Additional{})
 	log.Println("Redis successfully connected!")
 	return session.Middleware(redis)

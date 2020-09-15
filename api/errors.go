@@ -15,6 +15,7 @@ import (
 type (
 	ApiError struct {
 		Error     error
+		Model     string
 		Line      int
 		FileName  string
 		UserEmail string
@@ -27,9 +28,10 @@ type (
 )
 
 var (
-	ErrorNotFound = errors.New("NotFound")
-	ErrorConflict = errors.New("Conflict")
-	ErrorPassword = errors.New("Password")
+	ErrorNotFound     = errors.New("NotFound")
+	ErrorConflict     = errors.New("Conflict")
+	ErrorPassword     = errors.New("Password")
+	ErrorUserNotFound = errors.New("user not found")
 )
 
 const (
@@ -98,12 +100,11 @@ func (e *ApiError) LogError(c echo.Context, i interface{}) {
 	} else {
 		u_string = ""
 	}
-	error_list := strings.Split(e.Error.Error(), ": ")
 	body, _ := json.MarshalIndent(i, "", "\t")
 	log.Print(
 		"\n",
-		string(colorRed), error_list[0], ": \n",
-		"\t", string(colorWhite), error_list[1], "\n",
+		string(colorRed), "Error Message: \n",
+		"\t", string(colorWhite), e.Error.Error(), "\n",
 		"\tFile: [", e.FileName, "]\n",
 		"\tLine: [", e.Line, "]\n",
 		u_string,
