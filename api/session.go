@@ -1,6 +1,7 @@
-package auth
+package api
 
 import (
+	"encoding/json"
 	"net/http"
 	"os"
 
@@ -10,7 +11,7 @@ import (
 	"github.com/labstack/echo-contrib/session"
 )
 
-func SetSession(c echo.Context, user *User) {
+func SetSession(c echo.Context, user *UserSession) {
 	secure := true
 	if os.Getenv("COOKIE_SECURE") == "false" {
 		secure = false
@@ -26,6 +27,7 @@ func SetSession(c echo.Context, user *User) {
 		sameSite = http.SameSiteStrictMode
 	}
 	sess, _ := session.Get("session", c)
+
 	sess.Options = &sessions.Options{
 		Path:     "/",
 		MaxAge:   86400 * 7,
@@ -33,20 +35,22 @@ func SetSession(c echo.Context, user *User) {
 		SameSite: sameSite,
 		Secure:   secure,
 	}
+	sessionUser, _ := json.Marshal(user)
 	sess.Values["valid"] = true
-	sess.Values["user"] = &user
+	sess.Values["user"] = &sessionUser
 	sess.Save(c.Request(), c.Response())
 }
 
-func GetUser(c echo.Context) (u *User, contains bool) {
+func GetUser(c echo.Context) (u *UserSession, contains bool) {
 	sess, _ := session.Get("session", c)
 	val := sess.Values["user"]
-	var user = &User{}
-	user, contains = val.(*User)
+	var user []byte
+	user, contains = val.([]byte)
 	if contains == false {
 		return nil, contains
 	}
-	return user, true
+	json.Unmarshal(user, &u)
+	return u, true
 
 }
 

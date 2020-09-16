@@ -1,4 +1,4 @@
-package auth
+package api
 
 import (
 	"encoding/gob"
@@ -20,8 +20,8 @@ func RedisSession() echo.MiddlewareFunc {
 	if err != nil {
 		log.Fatal("failed to create redis store: ", err)
 	}
-	gob.Register(&User{})
-	gob.Register(&M{})
+	gob.Register(&UserSession{})
+	gob.Register(&Additional{})
 	log.Println("Redis successfully connected!")
 	return session.Middleware(redis)
 }
