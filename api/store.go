@@ -5,9 +5,9 @@ import (
 	"log"
 	"os"
 
-	"github.com/go-redis/redis"
-	"github.com/labstack/echo"
+	"github.com/go-redis/redis/v8"
 	"github.com/labstack/echo-contrib/session"
+	"github.com/labstack/echo/v4"
 )
 
 func RedisSession() echo.MiddlewareFunc {

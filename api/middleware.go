@@ -9,9 +9,9 @@ import (
 	"strings"
 
 	"github.com/Viva-con-Agua/echo-pool/resp"
-	"github.com/labstack/echo"
 	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/echo/middleware"
+	"github.com/labstack/echo/v4"
 )
 
 func SessionAuth(next echo.HandlerFunc) echo.HandlerFunc {

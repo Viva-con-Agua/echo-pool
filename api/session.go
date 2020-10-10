@@ -7,8 +7,8 @@ import (
 
 	"github.com/Viva-con-Agua/echo-pool/config"
 	"github.com/gorilla/sessions"
-	"github.com/labstack/echo"
 	"github.com/labstack/echo-contrib/session"
+	"github.com/labstack/echo/v4"
 )
 
 func SetSession(c echo.Context, user *UserSession) {
