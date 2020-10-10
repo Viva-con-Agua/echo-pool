@@ -1,9 +1,8 @@
-module github.com/Viva-con-Agua/echo-pool/api
+module github.com/Viva-con-Agua/echo-pool/api/
 
 go 1.15
 
 require (
-	github.com/Viva-con-Agua/echo-pool v0.0.0-20201010070857-8564f4bf7606
 	github.com/go-redis/redis/v8 v8.3.0
 	github.com/gorilla/sessions v1.2.1
 	github.com/jinzhu/configor v1.2.0 // indirect
